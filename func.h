@@ -9,6 +9,9 @@ void write_in_array (char*** array, char** buffer, int size_without_plus_byte);
 void change_newline_to_zero (char** buffer, int size_plus_byte);
 
 void print_text (char** array, int length);
-void print_line (char** array, int line_num);
+
+int str_cmp(const char* str1, const char* str2);
+
+void sort_array(char** array, int length);
 
 #endif

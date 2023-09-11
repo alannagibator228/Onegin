@@ -9,6 +9,7 @@ int main()
     
     int length = create_array_of_pointers(&array, &buffer);
 
+    sort_array(array, length);
     print_text(array, length);
     
     free(array);
