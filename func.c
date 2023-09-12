@@ -8,7 +8,7 @@ int create_array_of_pointers(char*** array, char ** buffer)
 {
     FILE *file;
     
-    if ((file=fopen("text.txt", "rb")) == NULL)
+    if ((file=fopen("Oxxxymiron.txt", "rb")) == NULL)
     {
     printf("Cannot open file.\n");
     }
@@ -88,6 +88,14 @@ void print_text(char** array, int length)
     }
 }
 
+int sor_cmp(const void* str1, const void* str2)
+{
+    char* str_1 = *(char**) str1;
+    char* str_2 = *(char**) str2;
+
+    return str_cmp(str_1, str_2);
+}
+
 int str_cmp(const char* str1, const char* str2)
 {
     int equal = 0;
@@ -105,17 +113,24 @@ int str_cmp(const char* str1, const char* str2)
 
 void sort_array(char** array, int length)
 {
+    int min = 0;
     char* p = NULL;
     for (int line_num_cmp = 0; line_num_cmp < length; line_num_cmp++)
     {
+        min = 0;
         for (int line_num = line_num_cmp; line_num < length - line_num_cmp; line_num++)
         {
             if (str_cmp(array[line_num], array[line_num_cmp]) < 0);
-            p = array[line_num];
-            array[line_num] = array[line_num_cmp];
-            array[line_num_cmp] = p;
+            min = line_num;
         }
-        
+        printf("%d ", min);
+        if (min != 0)
+        {
+            p = array[min];
+            array[min] = array[line_num_cmp];
+            array[line_num_cmp] = p;
+            p = NULL;
+        }
     }
     
 }

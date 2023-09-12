@@ -9,7 +9,7 @@ int main()
     
     int length = create_array_of_pointers(&array, &buffer);
 
-    sort_array(array, length);
+    qsort(array, length, sizeof(char*), sor_cmp); 
     print_text(array, length);
     
     free(array);

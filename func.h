@@ -10,8 +10,7 @@ void change_newline_to_zero (char** buffer, int size_plus_byte);
 
 void print_text (char** array, int length);
 
+int sor_cmp(const void* str1, const void* str2);
 int str_cmp(const char* str1, const char* str2);
-
-void sort_array(char** array, int length);
 
 #endif
