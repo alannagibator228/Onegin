@@ -11,7 +11,8 @@ int main()
 
     qsort(array, length, sizeof(char*), sor_cmp); 
     print_text(array, length);
-    
+    print_in_file(array, length);
+
     free(array);
     free(buffer);
 

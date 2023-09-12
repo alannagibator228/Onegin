@@ -1,7 +1,7 @@
-all: ArrayOfPointer
+all: Onegin
 
-ArrayOfPointer: main.o func.o
-	gcc main.o func.o -o ArrayOfPointer -lm -ggdb3
+Onegin: main.o func.o
+	gcc main.o func.o -o Onegin -lm -ggdb3
 main.o: main.c
 	gcc -c main.c -o main.o -lm -ggdb3
 

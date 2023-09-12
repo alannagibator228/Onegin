@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <math.h>
+#include <ctype.h>      
 #include "func.h"
 //-lasan -fsanitize=address -ggdb3
 
@@ -8,14 +10,14 @@ int create_array_of_pointers(char*** array, char ** buffer)
 {
     FILE *file;
     
-    if ((file=fopen("Oxxxymiron.txt", "rb")) == NULL)
+    if ((file=fopen("Slim.txt", "rb")) == NULL)
     {
     printf("Cannot open file.\n");
     }
     
     
-    int size_without_plus_byte = write_in_buffer(file, buffer);
-    int size_plus_byte = size_without_plus_byte + 1;
+    size_t size_without_plus_byte = write_in_buffer(file, buffer);
+    size_t size_plus_byte = size_without_plus_byte + 1;
 
     change_newline_to_zero(buffer, size_plus_byte);
 
@@ -26,12 +28,12 @@ int create_array_of_pointers(char*** array, char ** buffer)
     return length;
 }
 
-int write_in_buffer(FILE* file, char** buffer)
+size_t write_in_buffer(FILE* file, char** buffer)
 {
     struct stat file_inf;
     fstat (fileno (file), &file_inf); 
-    int size_without_plus_byte = file_inf.st_size; 
-    int size_plus_byte = size_without_plus_byte + 1;
+    size_t size_without_plus_byte = file_inf.st_size; 
+    size_t size_plus_byte = size_without_plus_byte + 1;
     
     *buffer = (char*) calloc(size_plus_byte, sizeof(char)); 
     
@@ -41,10 +43,10 @@ int write_in_buffer(FILE* file, char** buffer)
     return size_without_plus_byte;
 }
 
-int memory_for_array (char*** array, char** buffer, int size_without_plus_byte)
+int memory_for_array (char*** array, char** buffer, size_t size_without_plus_byte)
 {
     int length = 1;
-    for (int index = 1; index < size_without_plus_byte; index++)  
+    for (size_t index = 1; index < size_without_plus_byte; index++)  
     {
         if((*buffer)[index] == '\0')                
         {
@@ -55,11 +57,11 @@ int memory_for_array (char*** array, char** buffer, int size_without_plus_byte)
     return length;
 }
 
-void write_in_array (char*** array, char** buffer, int size_without_plus_byte)
+void write_in_array (char*** array, char** buffer, size_t size_without_plus_byte)
 {
     (*array)[0] = *buffer;                        
     int index_for_array = 1;
-    for (int index = 0; index < size_without_plus_byte; index++)  
+    for (size_t index = 0; index < size_without_plus_byte; index++)  
     {
         if((*buffer)[index] == '\0')
         {
@@ -69,9 +71,9 @@ void write_in_array (char*** array, char** buffer, int size_without_plus_byte)
     }
 }
 
-void change_newline_to_zero (char** buffer, int size_plus_byte)
+void change_newline_to_zero (char** buffer, size_t size_plus_byte)
 {
-    for (int index = 0; index < size_plus_byte; index++)  
+    for (size_t index = 0; index < size_plus_byte; index++)  
     {
         if((*buffer)[index] == '\n')
         {
@@ -88,6 +90,22 @@ void print_text(char** array, int length)
     }
 }
 
+void print_in_file(char** array, int length)
+{
+    FILE *file;
+    
+    if ((file=fopen("slimwrite.txt", "w")) == NULL)
+    {
+    printf("Cannot open file.\n");
+    }
+
+    for (int line_num = 0; line_num < length; line_num++)
+    {
+        fprintf(file, "%s\n", array[line_num]);
+    }
+    fclose (file);
+}
+
 int sor_cmp(const void* str1, const void* str2)
 {
     char* str_1 = *(char**) str1;
@@ -98,39 +116,42 @@ int sor_cmp(const void* str1, const void* str2)
 
 int str_cmp(const char* str1, const char* str2)
 {
-    int equal = 0;
-    int symbol_num = 0;
-    while (str2[symbol_num] != '\0')
+    int len_str1 = str_len(str1);
+    int len_str2 = str_len(str2);
+    int len = fmin(len_str1, len_str2);
+
+    int symbol_num_1 = 0;
+    int symbol_num_2 = 0;
+
+    while (symbol_num_1 < len && symbol_num_2 < len)
     {
-        if(str1[symbol_num] != str2[symbol_num])
+        if(!isalpha(str1[symbol_num_1]))
         {
-            equal = str1[symbol_num] - str2[symbol_num];
-            break;
+            symbol_num_1++;
         }
-        symbol_num++;
+        else if(!isalpha(str2[symbol_num_2]))
+        {
+            symbol_num_2++;
+        }
+        else if(str1[symbol_num_1] != str2[symbol_num_2])
+        {
+            return (str1[symbol_num_1] - str2[symbol_num_2]);
+        }
+        else
+        {
+        symbol_num_1++;
+        symbol_num_2++;
+        }
     }
+    return (len_str1 - len_str2);
 }
 
-void sort_array(char** array, int length)
+int str_len (const char* string)
 {
-    int min = 0;
-    char* p = NULL;
-    for (int line_num_cmp = 0; line_num_cmp < length; line_num_cmp++)
+    int symbol_num = 0;
+    while (string[symbol_num] != '\0')
     {
-        min = 0;
-        for (int line_num = line_num_cmp; line_num < length - line_num_cmp; line_num++)
-        {
-            if (str_cmp(array[line_num], array[line_num_cmp]) < 0);
-            min = line_num;
-        }
-        printf("%d ", min);
-        if (min != 0)
-        {
-            p = array[min];
-            array[min] = array[line_num_cmp];
-            array[line_num_cmp] = p;
-            p = NULL;
-        }
+        symbol_num++;
     }
-    
+    return symbol_num;
 }
