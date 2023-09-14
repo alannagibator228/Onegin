@@ -1,5 +1,5 @@
 all: Onegin
-
+ 
 Onegin: main.o func.o
 	gcc main.o func.o -o Onegin -lm -ggdb3  -fsanitize=address
 main.o: main.c
