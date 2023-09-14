@@ -1,5 +1,5 @@
 #ifndef FUNC_H
-#define FUNC_H 
+#define FUNC_H
 
 int create_array_of_pointers (char*** array, char** buffer);
 size_t write_in_buffer (FILE* file, char** buffer);

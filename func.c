@@ -123,7 +123,7 @@ void print_text_in_file (char** array, int length, FILE* file)
         {
             fprintf(file, "%70s\n", array[line_num]);
         }
-    } 
+    }
 }
 
 void print_decor_division(FILE* file)
