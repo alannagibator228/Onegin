@@ -6,11 +6,12 @@
 
 int create_array_of_pointers(char*** array, char ** buffer)
 {
-    FILE *file;
+    FILE *file = NULL;
     
-    if ((file=fopen("stan.txt", "rb")) == NULL)
+    if ((file=fopen("stan.txt", "r")) == NULL) ///TODO менять файл легко + зачем rb
     {
-    printf("Cannot open file.\n");
+        printf("Cannot open file.\n");   //TODO perror
+        return -1;   //TODO в константу
     }
     
     
@@ -26,7 +27,7 @@ int create_array_of_pointers(char*** array, char ** buffer)
     return length;
 }
 
-size_t write_in_buffer(FILE* file, char** buffer)
+size_t write_in_buffer(FILE* file, char** buffer)            //TODO везде проверять входные аргументы
 {
     struct stat file_inf;
     fstat (fileno (file), &file_inf); 
@@ -46,12 +47,12 @@ int allocate_mem_for_array (char*** array, char** buffer, size_t size_without_pl
     int length = 1;
     for (size_t index = 1; index < size_without_plus_byte; index++)  
     {
-        if((*buffer)[index] == '\0')                
+        if((*buffer)[index] == '\0')                //TODO зарание записать их количество
         {
             length++;
         }
     }
-    *array = (char**) calloc(length, sizeof(char*));
+    *array = (char**) calloc(length, sizeof(char*));    //TODO почитать как она работает 
     return length;
 }
 

@@ -8,7 +8,7 @@
 
 int main()
 {
-    char** array = NULL;
+    char** array = NULL;  //TODO array не понятно что это     и засунуть всё в структуру
     char* buffer = NULL;
     
     int length = create_array_of_pointers(&array, &buffer);

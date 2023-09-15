@@ -22,14 +22,14 @@ int sor_cmp_rhyme(const void* str1, const void* str2)
 
 int str_cmp(const char* str1, const char* str2)
 {
-    int len_str1 = str_len(str1);
+    int len_str1 = str_len(str1);   //////TODO оптимизировать
     int len_str2 = str_len(str2);
     int len = fmin(len_str1, len_str2);
 
     int symbol_num_1 = 0;
     int symbol_num_2 = 0;
 
-    while (symbol_num_1 < len && symbol_num_2 < len)
+    while (symbol_num_1 < len && symbol_num_2 < len)      ///TODO почитать про указатели на функции
     {
         if(!isalpha(str1[symbol_num_1]))
         {
@@ -54,7 +54,7 @@ int str_cmp(const char* str1, const char* str2)
 
 int str_cmp_rhyme(const char* str1, const char* str2)
 {
-    int len_str1 = str_len(str1);
+    int len_str1 = str_len(str1);                     /////TODO лучше вообще записать все длины всех строчек
     int len_str2 = str_len(str2);
     int len = fmin(len_str1, len_str2);
 
