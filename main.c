@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "func.h"  
+#include "create_array.h"
+#include "print_text.h"  
+#include "sorting.h"
 
 // TODO Add more types of sort.
 
