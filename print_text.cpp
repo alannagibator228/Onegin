@@ -49,14 +49,14 @@ void print_text_in_file (ParsedText* Text, FILE* file)                //TODO Ð¾Ð
     assert(Text->array_of_pointers != NULL);
     assert(Text->length >= 0);
 
-    for (int line_num = 0; line_num < Text->length -1; line_num++)
+    for (int line_num = 0; line_num < Text->length; line_num++)
     {
 
         if (!((str_len((Text->array_of_pointers)[line_num]) <= 1) && ((Text->array_of_pointers)[line_num][0] == '\0')))
         {
             fprintf(file, "%70s\n", (Text->array_of_pointers)[line_num]);
         }
-    }     
+    }
 }
 
 void print_decor_division(FILE* file)

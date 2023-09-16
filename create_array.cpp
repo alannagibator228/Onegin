@@ -77,16 +77,21 @@ void write_pointers_and_len_str (ParsedText* Text)
 
     (Text->array_of_pointers)[0] = (Text->buffer);                        
     int index_for_array = 1;
-    int len_str = 0;
-    for (size_t index = 0; index < Text->size; index++)  
+    int len_str = 1;
+    (Text->len_str)[index_for_array-1] = len_str - 1;
+    for (size_t index = 1; index < Text->size; index++)  
     {
-        len_str++;
         if((Text->buffer)[index] == '\0')
         {
             (Text->array_of_pointers)[index_for_array] = (Text->buffer) + index + 1;
-            (Text->len_str)[index_for_array-1] = len_str;
             len_str = 0;
             index_for_array++;
         }
+        else
+        {
+            len_str++;
+            (Text->len_str)[index_for_array-1] = len_str - 1;
+        }
     }
+    (Text->len_str)[index_for_array-1] = len_str;
 }

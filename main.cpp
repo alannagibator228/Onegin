@@ -8,7 +8,7 @@ int main()
 {
     ParsedText Text;
 
-    const char* name_file_for_read = "stan.txt";
+    const char* name_file_for_read = "fuck.txt";
     const char* name_file_for_write = "for_answer.txt";
 
     create_array_of_pointers(&Text, (const char*) name_file_for_read);
