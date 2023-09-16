@@ -4,8 +4,6 @@
 #include "print_text.h"  
 #include "sorting.h"
 
-// TODO Add more types of sort.
-
 int main()
 {
     ParsedText Text;
@@ -14,7 +12,7 @@ int main()
     const char* name_file_for_write = "for_answer.txt";
 
     create_array_of_pointers(&Text, (const char*) name_file_for_read);
-    print_answer_in_file(Text, name_file_for_write);
+    print_answer_in_file(&Text, name_file_for_write);
 
     free(Text.array_of_pointers);
     free(Text.buffer);
