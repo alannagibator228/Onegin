@@ -1,12 +1,24 @@
-#ifndef CREATE_ARRAY   ////TODO погуглить зачем это
+#ifndef CREATE_ARRAY
 #define CREATE_ARRAY
 
-int create_array_of_pointers (char*** array, char** buffer);  //TODO убрать лишние *
-size_t write_in_buffer (FILE* file, char** buffer);
-int allocate_mem_for_array (char*** array, char** buffer, size_t size_without_plus_byte);
-void write_in_array (char*** array, char** buffer, size_t size_without_plus_byte);
+#define INVALID_LENGTH -1
 
-void change_newline_to_zero (char** buffer, size_t size_plus_byte);
+typedef struct 
+{
+    char** array_of_pointers;
+    int length;
+
+    char* buffer;
+    size_t size;
+} Onegin;
+
+void create_array_of_pointers (Onegin* examination, const char* name_file_for_read);
+
+void write_in_buffer (Onegin* examination, FILE* file);
+void change_newline_to_zero (Onegin* examination);
+
+void allocate_mem_for_array (Onegin* examination);
+void write_in_array (Onegin* examination);
 
 
 #define MAX(a,b) a > b ? a : b;
