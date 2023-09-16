@@ -18,7 +18,7 @@ void print_answer_in_file(Onegin examination, const char* name_file_for_write)
 
     if ((file = fopen(name_file_for_write, "w")) == NULL)
     {
-    printf("Cannot open file.\n");
+    perror("Cannot open file for answer.\n");
     }
 
     print_text_in_file (examination, file);

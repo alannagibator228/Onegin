@@ -10,7 +10,7 @@ void create_array_of_pointers(Onegin* examination, const char* name_file_for_rea
 
     if ((file=fopen(name_file_for_read, "r")) == NULL)
     {
-        printf("Cannot open file.\n");   //TODO perror
+        perror("Cannot open file for read.\n");
     }
     
     
@@ -19,7 +19,7 @@ void create_array_of_pointers(Onegin* examination, const char* name_file_for_rea
     count_lines_and_change_newline_to_zero(examination);
 
     allocate_mem_for_array (examination);
-    write_in_array (examination);
+    write_pointers_and_len_str (examination);
 
     fclose (file);
 }
@@ -53,17 +53,22 @@ void count_lines_and_change_newline_to_zero (Onegin* examination)
 void allocate_mem_for_array (Onegin* examination)
 {
     (examination->array_of_pointers) = (char**) calloc(examination->length, sizeof(char*));    //TODO почитать как она работает 
+    (examination->len_str)           = (int*)   calloc(examination->length, sizeof(int));
 }
 
-void write_in_array (Onegin* examination)
+void write_pointers_and_len_str (Onegin* examination)
 {
     (examination->array_of_pointers)[0] = (examination->buffer);                        
     int index_for_array = 1;
+    int len_str = 0;
     for (size_t index = 0; index < examination->size; index++)  
     {
+        len_str++;
         if((examination->buffer)[index] == '\0')
         {
             (examination->array_of_pointers)[index_for_array] = (examination->buffer) + index + 1;
+            (examination->len_str)[index_for_array-1] = len_str;
+            len_str = 0;
             index_for_array++;
         }
     }

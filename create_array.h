@@ -10,15 +10,16 @@ typedef struct
 
     char* buffer;
     size_t size;
+    int* len_str;
 } Onegin;
 
 void create_array_of_pointers (Onegin* examination, const char* name_file_for_read);
 
 void write_in_buffer (Onegin* examination, FILE* file);
-void count_lines_and_change_newline_to_zero (Onegin* examination);
+void count_lines_and_change_newline_to_zero (Onegin* examination); 
 
 void allocate_mem_for_array (Onegin* examination);
-void write_in_array (Onegin* examination);
+void write_pointers_and_len_str (Onegin* examination);
 
 
 #define MAX(a,b) a > b ? a : b;
