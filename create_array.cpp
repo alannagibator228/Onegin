@@ -16,7 +16,7 @@ void create_array_of_pointers(Onegin* examination, const char* name_file_for_rea
     
     write_in_buffer(examination, file);
 
-    change_newline_to_zero(examination);
+    count_lines_and_change_newline_to_zero(examination);
 
     allocate_mem_for_array (examination);
     write_in_array (examination);
@@ -37,27 +37,21 @@ void write_in_buffer(Onegin* examination, FILE* file)            //TODO везд
     (examination->buffer)[examination->size] = '\n';
 }
 
-void change_newline_to_zero (Onegin* examination)
+void count_lines_and_change_newline_to_zero (Onegin* examination)
 {
+    examination->length = 0;
     for (size_t index = 0; index < examination->size + 1; index++)  
     {
         if((examination->buffer)[index] == '\n')
         {
             (examination->buffer)[index] = '\0';
+            examination->length++;
         }
     }
 }
 
 void allocate_mem_for_array (Onegin* examination)
 {
-    examination->length = 1;
-    for (size_t index = 1; index < examination->size; index++)  
-    {
-        if((examination->buffer)[index] == '\0')                //TODO зарание записать их количество
-        {
-            examination->length++;
-        }
-    }
     (examination->array_of_pointers) = (char**) calloc(examination->length, sizeof(char*));    //TODO почитать как она работает 
 }
 
