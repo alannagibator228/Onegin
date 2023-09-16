@@ -8,16 +8,16 @@
 
 int main()
 {
-    Onegin examination;
+    ParsedText Text;
 
     const char* name_file_for_read = "stan.txt";
     const char* name_file_for_write = "for_answer.txt";
 
-    create_array_of_pointers(&examination, (const char*) name_file_for_read);
-    print_answer_in_file(examination, name_file_for_write);
+    create_array_of_pointers(&Text, (const char*) name_file_for_read);
+    print_answer_in_file(Text, name_file_for_write);
 
-    free(examination.array_of_pointers);
-    free(examination.buffer);
+    free(Text.array_of_pointers);
+    free(Text.buffer);
 
     return 0;
 }

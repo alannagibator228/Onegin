@@ -11,15 +11,15 @@ typedef struct
     char* buffer;
     size_t size;
     int* len_str;
-} Onegin;
+} ParsedText;
 
-void create_array_of_pointers (Onegin* examination, const char* name_file_for_read);
+void create_array_of_pointers (ParsedText* Text, const char* name_file_for_read);
 
-void write_in_buffer (Onegin* examination, FILE* file);
-void count_lines_and_change_newline_to_zero (Onegin* examination); 
+void write_in_buffer (ParsedText* Text, FILE* file);
+void count_lines_and_change_newline_to_zero (ParsedText* Text); 
 
-void allocate_mem_for_array (Onegin* examination);
-void write_pointers_and_len_str (Onegin* examination);
+void allocate_mem_for_array (ParsedText* Text);
+void write_pointers_and_len_str (ParsedText* Text);
 
 
 #define MAX(a,b) a > b ? a : b;
