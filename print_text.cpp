@@ -7,7 +7,7 @@
 
 void print_text(ParsedText* Text)
 {
-    assert(Text->length >= 0);           //TODO assert
+    assert(Text->length >= 0);
 
     for (int line_num = 0; line_num < Text->length; line_num++)
     {
@@ -17,7 +17,7 @@ void print_text(ParsedText* Text)
 
 void print_answer_in_file(ParsedText* Text, const char* name_file_for_write)
 {
-    assert(name_file_for_write != "");                           // TODO assert
+    assert(name_file_for_write != "");
     assert(Text->array_of_pointers != NULL);
     assert(Text->length >= 0);
 
@@ -45,7 +45,7 @@ void print_answer_in_file(ParsedText* Text, const char* name_file_for_write)
 
 void print_text_in_file (ParsedText* Text, FILE* file)                //TODO оптимизировать вывод
 {
-    assert(file != NULL);                                            //TODO assert
+    assert(file != NULL);
     assert(Text->array_of_pointers != NULL);
     assert(Text->length >= 0);
 

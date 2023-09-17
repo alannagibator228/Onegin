@@ -7,7 +7,7 @@
 
 void create_array_of_pointers(ParsedText* Text, const char* name_file_for_read)
 {
-    assert(Text != NULL);                 //TODO assert
+    assert(Text != NULL);
 
     FILE *file = NULL;
 
@@ -29,7 +29,7 @@ void create_array_of_pointers(ParsedText* Text, const char* name_file_for_read)
 
 void write_in_buffer(ParsedText* Text, FILE* file)   
 {
-    assert(Text != NULL);      //TODO assert
+    assert(Text != NULL);
     assert(file != NULL);
 
     struct stat file_inf;
@@ -39,7 +39,7 @@ void write_in_buffer(ParsedText* Text, FILE* file)
     
     Text->buffer = (char*) calloc(size_plus_byte, sizeof(char)); 
 
-    assert(Text->buffer != NULL);   //TODO assert
+    assert(Text->buffer != NULL);
     
     fread(Text->buffer, sizeof(char), Text->size, file);
     (Text->buffer)[Text->size] = '\n';
@@ -47,7 +47,7 @@ void write_in_buffer(ParsedText* Text, FILE* file)
 
 void count_lines_and_change_newline_to_zero (ParsedText* Text)
 {
-    assert(Text != NULL);                  //TODO assert
+    assert(Text != NULL);
     assert(Text->buffer != NULL);
 
     Text->length = 0;
@@ -63,10 +63,13 @@ void count_lines_and_change_newline_to_zero (ParsedText* Text)
 
 void allocate_mem_for_array (ParsedText* Text)
 {
-    assert(Text != NULL); // TODO assert
+    assert(Text != NULL);
 
-    (Text->array_of_pointers) = (char**) calloc(Text->length, sizeof(char*));    //TODO почитать как она работает 
+    (Text->array_of_pointers) = (char**) calloc(Text->length, sizeof(char*));
     (Text->len_str)           = (int*)   calloc(Text->length, sizeof(int));
+
+    assert(Text->array_of_pointers != NULL); //TODO assert
+    assert(Text->len_str != NULL);
 }
 
 void write_pointers_and_len_str (ParsedText* Text)

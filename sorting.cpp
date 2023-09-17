@@ -24,7 +24,7 @@
 
 int str_cmp(ParsedText* Text, const int num_str1, const int num_str2)
 {
-    assert(Text != NULL);     //TODO assert
+    assert(Text != NULL);
     assert(num_str1 >= 0);
     assert(num_str2 >= 0);
 
@@ -58,7 +58,7 @@ int str_cmp(ParsedText* Text, const int num_str1, const int num_str2)
 
 int str_cmp_rhyme(ParsedText* Text, const int num_str1, const int num_str2)
 {
-    assert(Text != NULL);     //TODO assert
+    assert(Text != NULL);
     assert(num_str1 >= 0);
     assert(num_str2 >= 0);
 
@@ -119,7 +119,7 @@ void swap (ParsedText* Text, int element_1, int element_2)
 
 void selection_sort (ParsedText* Text, int (*comp) (ParsedText* Text, const int num_str1, const int num_str2))
 {
-    assert(Text != NULL);     //TODO assert
+    assert(Text != NULL);
     assert(comp != NULL);
 
     int index_min;
