@@ -5,7 +5,7 @@
 #include "sorting.h"
 #include "create_array.h"
 
-void print_text(ParsedText* Text)
+void print_text(ParsedText *Text)
 {
     assert(Text->length >= 0);
 
@@ -15,7 +15,25 @@ void print_text(ParsedText* Text)
     }
 }
 
-void print_answer_in_file(ParsedText* Text, const char* name_file_for_write)
+void print_unsorted_text_in_file(ParsedText *Text, const char *name_file_for_write)
+{
+    assert(name_file_for_write != "");
+    assert(Text->buffer != NULL);
+    assert(Text->size >= 0);
+
+    FILE *file;
+
+    if ((file = fopen(name_file_for_write, "w")) == NULL)
+    {
+        perror("Cannot open file for answer.\n");
+    }
+
+    fwrite(Text->buffer, sizeof(char), Text->size, file);
+
+    fclose(file);
+}
+
+void print_answer_in_file(ParsedText *Text, const char *name_file_for_write)
 {
     assert(name_file_for_write != "");
     assert(Text->array_of_pointers != NULL);
@@ -23,27 +41,25 @@ void print_answer_in_file(ParsedText* Text, const char* name_file_for_write)
 
     FILE *file;
 
-    if ((file = fopen(name_file_for_write, "w")) == NULL)
+    if ((file = fopen(name_file_for_write, "a")) == NULL)
     {
-    perror("Cannot open file for answer.\n");
+        perror("Cannot open file for answer.\n");
     }
-
-    print_text_in_file (Text, file);
 
     print_decor_division(file);
 
     selection_sort(Text, str_cmp);
-    print_text_in_file (Text, file);
+    print_text_in_file(Text, file);
 
     print_decor_division(file);
 
     selection_sort(Text, str_cmp_rhyme);
-    print_text_in_file (Text, file);
+    print_text_in_file(Text, file);
 
-    fclose (file);
+    fclose(file);
 }
 
-void print_text_in_file (ParsedText* Text, FILE* file)                //TODO оптимизировать вывод
+void print_text_in_file(ParsedText *Text, FILE *file) // TODO оптимизировать вывод
 {
     assert(file != NULL);
     assert(Text->array_of_pointers != NULL);
@@ -54,12 +70,12 @@ void print_text_in_file (ParsedText* Text, FILE* file)                //TODO о�
 
         if (!((str_len((Text->array_of_pointers)[line_num]) <= 1) && ((Text->array_of_pointers)[line_num][0] == '\0')))
         {
-            fprintf(file, "%70s\n", (Text->array_of_pointers)[line_num]);
+            fprintf(file, "%80s\n", (Text->array_of_pointers)[line_num]);
         }
     }
 }
 
-void print_decor_division(FILE* file)
+void print_decor_division(FILE *file)
 {
     "hellow "
     "world!";
