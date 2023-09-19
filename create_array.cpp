@@ -10,7 +10,7 @@ void create_array_of_pointers(ParsedText *Text)
 {
     assert(Text != NULL);
 
-    count_lines_and_change_newline_to_zero(Text);
+    count_lines(Text);
 
     allocate_mem_for_array(Text);
     write_pointers_and_len_str(Text);
@@ -41,7 +41,7 @@ void write_in_buffer(ParsedText *Text, const char *name_file_for_read)
     fclose(file);
 }
 
-void count_lines_and_change_newline_to_zero(ParsedText *Text)
+void count_lines(ParsedText *Text)
 {
     assert(Text != NULL);
     assert(Text->buffer != NULL);
@@ -51,7 +51,6 @@ void count_lines_and_change_newline_to_zero(ParsedText *Text)
     {
         if ((Text->buffer)[index] == '\n')
         {
-            (Text->buffer)[index] = '\0';
             Text->length++;
         }
     }
@@ -80,7 +79,7 @@ void write_pointers_and_len_str(ParsedText *Text)
     (Text->len_str)[index_for_array - 1] = len_str - 1;
     for (size_t index = 1; index < Text->size; index++)
     {
-        if ((Text->buffer)[index] == '\0')
+        if ((Text->buffer)[index] == '\n')
         {
             (Text->array_of_pointers)[index_for_array] = (Text->buffer) + index + 1;
             len_str = 0;

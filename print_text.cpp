@@ -23,11 +23,11 @@ void print_unsorted_text_in_file(ParsedText *Text, const char *name_file_for_wri
 
     FILE *file;
 
-    if ((file = fopen(name_file_for_write, "w")) == NULL)
+    if ((file = fopen(name_file_for_write, "a")) == NULL)
     {
         perror("Cannot open file for answer.\n");
     }
-
+    
     fwrite(Text->buffer, sizeof(char), Text->size, file);
 
     fclose(file);
@@ -41,12 +41,10 @@ void print_answer_in_file(ParsedText *Text, const char *name_file_for_write)
 
     FILE *file;
 
-    if ((file = fopen(name_file_for_write, "a")) == NULL)
+    if ((file = fopen(name_file_for_write, "w")) == NULL)
     {
         perror("Cannot open file for answer.\n");
     }
-
-    print_decor_division(file);
 
     selection_sort(Text, str_cmp);
     print_text_in_file(Text, file);
@@ -55,6 +53,8 @@ void print_answer_in_file(ParsedText *Text, const char *name_file_for_write)
 
     selection_sort(Text, str_cmp_rhyme);
     print_text_in_file(Text, file);
+
+    print_decor_division(file);
 
     fclose(file);
 }
@@ -70,7 +70,8 @@ void print_text_in_file(ParsedText *Text, FILE *file) // TODO оптимизир
 
         if (!((str_len((Text->array_of_pointers)[line_num]) <= 1) && ((Text->array_of_pointers)[line_num][0] == '\0')))
         {
-            fprintf(file, "%80s\n", (Text->array_of_pointers)[line_num]);
+            fwrite(Text->array_of_pointers[line_num], sizeof(char), Text->len_str[line_num], file);
+            fprintf(file, "\n");
         }
     }
 }

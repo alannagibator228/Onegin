@@ -16,7 +16,7 @@ typedef struct
 void create_array_of_pointers(ParsedText *Text);
 
 void write_in_buffer(ParsedText *Text, const char *name_file_for_read);
-void count_lines_and_change_newline_to_zero(ParsedText *Text);
+void count_lines(ParsedText *Text);
 
 void allocate_mem_for_array(ParsedText *Text);
 void write_pointers_and_len_str(ParsedText *Text);
